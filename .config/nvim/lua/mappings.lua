@@ -33,4 +33,8 @@ map("n", "<Leader>dgl",
 )
 map("n", "<Leader>gsj", "<cmd>GoTagAdd json<CR>", { desc = "Add json struct tags"})
 map("n", "<Leader>gsy", "<cmd>GoTagAdd yaml<CR>", { desc = "Add yaml struct tags"})
+map("n", "<C-h>", "<cmd>TmuxNaviateLeft<CR>", { desc = "window left"})
+map("n", "<C-l>", "<cmd>TmuxNaviateRight<CR>", { desc = "window right"})
+map("n", "<C-j>", "<cmd>TmuxNaviateDown<CR>", { desc = "window down"})
+map("n", "<C-k>", "<cmd>TmuxNaviateUp<CR>", { desc = "window up"})
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
