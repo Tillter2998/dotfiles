@@ -6,7 +6,6 @@ return {
       require "configs.conform"
     end,
   },
-  -- TESTING COMMENT
   {
     "williamboman/mason.nvim",
     opts = {
