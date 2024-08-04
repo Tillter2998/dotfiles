@@ -2,6 +2,10 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
 fi
 
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Path to your oh-my-zsh installation.

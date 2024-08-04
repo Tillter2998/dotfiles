@@ -22,3 +22,15 @@ style = "Regular"
 
 [font.offset]
 x = 0
+
+# [[keyboard.bindings]]
+# key = "H"
+# mods = "Alt"
+# action = "SendString"
+# chars = "\u001bh"
+#
+# [[keyboard.bindings]]
+# key = "L"
+# mods = "Alt"
+# action = "SendString"
+# chars = "\u001bl"
