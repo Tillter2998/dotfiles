@@ -11,6 +11,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Path to your oh-my-zsh installation.
 export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:/usr/local/bin"
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
