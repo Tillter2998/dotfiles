@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -24,15 +24,16 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { "catppuccin/nvim",
+    {
+      "catppuccin/nvim",
       name = "catppuccin",
       config = function()
-	require("catppuccin").setup({
-	  flavor = "mocha",
-	  integrations = {
-	    nvimtree = true,
-	  }
-	})
+        require("catppuccin").setup({
+          flavor = "mocha",
+          integrations = {
+            nvimtree = true,
+          }
+        })
         vim.cmd.colorscheme "catppuccin-mocha"
       end
     },

@@ -41,6 +41,13 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live gr
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
+-- dap/dapui
+vim.keymap.set('n', '<leader>db', ":lua require'dap'.toggle_breakpoint()<CR>", { desc = 'Toggle Breakpoint' })
+vim.keymap.set('n', '<F5>', '<cmd>lua require"dap".continue()<CR>', opts)
+vim.keymap.set('n', '<F8>', '<cmd>lua require"dap".step_over()<CR>', opts)
+vim.keymap.set('n', '<F7>', '<cmd>lua require"dap".step_into()<CR>', opts)
+vim.keymap.set('n', '<F9>', '<cmd>lua require"dap".step_out()<CR>', opts)
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
