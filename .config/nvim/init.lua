@@ -16,13 +16,8 @@ vim.keymap.set("i", "kj", "<ESC>")
 vim.keymap.set("n", "<leader><space>x", "<cmd>source %<CR>")
 vim.keymap.set("n", "<ESC>", "<cmd>noh<CR>")
 
--- Nvim Tree
-vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
-
 -- bufferline
-vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
-vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
-vim.keymap.set("n", "<leader>x", ":bd<CR>")
+
 
 -- tmux navigator
 vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "window left" })
