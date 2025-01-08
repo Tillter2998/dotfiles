@@ -1,4 +1,3 @@
-
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
@@ -196,10 +195,6 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
-
-[[on-window-detected]]
-if.app-id ='com.google.Chrome'
-run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id ='com.google.Chrome'

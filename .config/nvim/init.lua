@@ -1,49 +1,26 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
-vim.g.mapleader = " "
+-- vim options
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.termguicolors = true
-vim.o.number = true
-vim.o.relativenumber = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("config.lazy")
+
+-- General key binds
+vim.keymap.set("i", "kj", "<ESC>")
+vim.keymap.set("n", "<leader><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<ESC>", "<cmd>noh<CR>")
+vim.keymap.set("v", "<leader>w", ":'<,'>WrapSelected<CR>", { silent = true })
+
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
-  pattern = '*',
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 150 }
+    vim.highlight.on_yank()
   end,
 })
-
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
-if not vim.loop.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
-end
-
-vim.opt.rtp:prepend(lazypath)
-
-local lazy_config = require "configs.lazy"
-
--- load plugins
-require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
-    config = function()
-      require "options"
-    end,
-  },
-
-  { import = "plugins" },
-}, lazy_config)
-
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
-
-require "nvchad.autocmds"
-
-vim.schedule(function()
-  require "mappings"
-end)

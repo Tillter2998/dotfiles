@@ -4,7 +4,7 @@ autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
     local params = vim.lsp.util.make_range_params()
-    params.context = {only = {"source.organizeImports"}}
+    params.context = { only = { "source.organizeImports" } }
     -- buf_request_sync defaults to a 1000ms timeout. Depending on your
     -- machine and codebase, you may want longer. Add an additional
     -- argument after params if you find that you have to write the file
@@ -19,6 +19,24 @@ autocmd("BufWritePre", {
         end
       end
     end
-    vim.lsp.buf.format({async = false})
+    vim.lsp.buf.format({ async = false })
   end
 })
+--
+-- autocmd('LspAttach', {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     if not client then return end
+--
+--     ---@diagnostic disable-next-line: missing-parameter
+--     if client.supports_method('textDocument/formatting') then
+--       -- Format the current buffer on saved
+--       autocmd('BufWritePre', {
+--         buffer = args.buf,
+--         callback = function()
+--           vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+--         end,
+--       })
+--     end
+--   end,
+-- })
