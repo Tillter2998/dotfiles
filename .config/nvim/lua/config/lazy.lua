@@ -24,20 +24,6 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    {
-      "catppuccin/nvim",
-      name = "catppuccin",
-      config = function()
-        require("catppuccin").setup({
-          flavor = "mocha",
-          integrations = {
-            nvimtree = true,
-          }
-        })
-        vim.cmd.colorscheme "catppuccin-mocha"
-      end
-    },
-    -- import your plugins
     { import = "plugins" },
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -46,3 +32,5 @@ require("lazy").setup({
   -- automatically check for plugin updates
   -- checker = { enabled = true },
 })
+
+vim.keymap.set("n", "<leader>ls", "<cmd>Lazy sync<CR>")

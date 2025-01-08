@@ -1,39 +1,25 @@
-local function delete_current_buffer()
-  local current_buf = vim.api.nvim_get_current_buf()
-  local buf_list = vim.fn.getbufinfo({ buflisted = 1 })
-  local nvim_tree_buf = nil
+local function delete_buffer()
+  local current_buffer = vim.api.nvim_get_current_buf()
+  local buffer_list = vim.fn.getbufinfo({ buflisted = 1 })
+  local nvim_tree_buffer = nil
+  -- local previousBuf = nil
 
-  -- Find Nvim Tree buffer, if open
-  for _, buf in ipairs(buf_list) do
+  -- Find nvim tree buffer
+  for _, buf in ipairs(buffer_list) do
     if buf.name:match("NvimTree_") then
-      nvim_tree_buf = buf.bufnr
+      nvim_tree_buffer = buf.bufnr
       break
     end
   end
 
-  -- Switch to the previous buffer
-  vim.cmd("bprevious")
+  vim.cmd("bp")
+  -- previousBuf = vim.api.nvim_get_current_buf()
 
-  -- Get the buffer after `:bprevious` runs
-  local previous_buf = vim.api.nvim_get_current_buf()
-
-  -- If the previous buffer is Nvim Tree, move to another buffer or create a new one
-  if previous_buf == nvim_tree_buf or previous_buf == current_buf then
-    for _, buf in ipairs(buf_list) do
-      if buf.bufnr ~= current_buf and buf.bufnr ~= nvim_tree_buf then
-        vim.api.nvim_set_current_buf(buf.bufnr)
-        break
-      end
-    end
+  if vim.api.nvim_get_current_buf() == nvim_tree_buffer then
+    vim.cmd("enew")
   end
 
-  -- If no other buffers are available, create a new buffer
-  if vim.api.nvim_get_current_buf() == nvim_tree_buf then
-    vim.cmd("enew")     -- Create a new empty buffer
-  end
-
-  -- Finally, delete the current buffer
-  vim.cmd("bdelete " .. current_buf)
+  vim.cmd("bd!" .. current_buffer)
 end
 
 return {
@@ -57,7 +43,7 @@ return {
 
       vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
       vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
-      vim.keymap.set("n", "<leader>x", delete_current_buffer, { noremap = true, silent = true })
+      vim.keymap.set("n", "<leader>x", delete_buffer, { noremap = true, silent = true })
     end,
   },
 }

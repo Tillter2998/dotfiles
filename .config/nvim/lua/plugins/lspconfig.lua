@@ -34,6 +34,7 @@ return {
         },
       }
       require("custom.autocmds")
+      vim.keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>")
     end
   },
 }
