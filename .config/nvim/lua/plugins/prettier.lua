@@ -18,6 +18,7 @@ return {
         "typescript",
         "typescriptreact",
         "yaml",
+        "vue",
       },
     })
   end

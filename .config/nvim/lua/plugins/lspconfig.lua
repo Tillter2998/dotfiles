@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "saghen/blink.cmp",
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -15,10 +16,12 @@ return {
       },
     },
     config = function()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
       local lspconfig = require("lspconfig")
       local util = require("lspconfig/util")
-      lspconfig.lua_ls.setup {}
+      lspconfig.lua_ls.setup { capabilities = capabilities }
       lspconfig.gopls.setup {
+        capabilities = capabilities,
         cmd = { "gopls" },
         filetypes = { "go", "gomod", "gowork", "gotmpl" },
         root_dir = util.root_pattern("go.work", "go.mod", ".git"),
@@ -33,10 +36,36 @@ return {
           },
         },
       }
-      lspconfig.ts_ls.setup {
-        capabilities = require("cmp_nvim_lsp").default_capabilities()
+      lspconfig.volar.setup {
+        capabilities = capabilities,
+        -- add filetypes for typescript, javascript and vue
+        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+        init_options = {
+          vue = {
+            -- disable hybrid mode
+            hybridMode = false,
+          },
+        },
       }
-      lspconfig.vuels.setup {}
+      lspconfig.ts_ls.setup {
+        capabilities = capabilities
+        -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        -- init_options = {
+        --   plugins = {
+        --     {
+        --       name = "@vue/typescript-plugin",
+        --       location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+        --       languages = { "javascript", "typescript", "vue" },
+        --     },
+        --   },
+        -- },
+        -- filetypes = {
+        --   "javascript",
+        --   "typescript",
+        --   "vue",
+        -- },
+      }
+      -- lspconfig.vuels.setup {}
       require("custom.autocmds")
       vim.keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>")
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -50,7 +79,10 @@ return {
             vim.api.nvim_create_autocmd('BufWritePre', {
               buffer = args.buf,
               callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                -- local fileType = vim.bo.filetype
+                local conform = require("conform")
+                conform.format({ bufnr = args.buf, id = client.id })
+                -- vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
               end,
             })
           end
