@@ -47,29 +47,34 @@ return {
           },
         },
       }
-      lspconfig.ts_ls.setup {
-        capabilities = capabilities
-        -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        -- init_options = {
-        --   plugins = {
-        --     {
-        --       name = "@vue/typescript-plugin",
-        --       location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-        --       languages = { "javascript", "typescript", "vue" },
-        --     },
-        --   },
-        -- },
-        -- filetypes = {
-        --   "javascript",
-        --   "typescript",
-        --   "vue",
-        -- },
+      lspconfig.jsonls.setup {
+        capabilities = capabilities,
       }
+      -- lspconfig.ts_ls.setup {
+      --   capabilities = capabilities
+      --   -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      --   -- init_options = {
+      --   --   plugins = {
+      --   --     {
+      --   --       name = "@vue/typescript-plugin",
+      --   --       location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+      --   --       languages = { "javascript", "typescript", "vue" },
+      --   --     },
+      --   --   },
+      --   -- },
+      --   -- filetypes = {
+      --   --   "javascript",
+      --   --   "typescript",
+      --   --   "vue",
+      --   -- },
+      -- }
       -- lspconfig.vuels.setup {}
       require("custom.autocmds")
-      vim.keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>")
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
+          vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { noremap = true, silent = true, buffer = args.buf })
+          vim.keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>")
+          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true })
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
 

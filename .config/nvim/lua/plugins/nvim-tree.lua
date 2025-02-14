@@ -10,9 +10,12 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("nvim-tree").setup {}
-
-      vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
+      require("nvim-tree").setup({
+        view = {
+          width = 40,
+        },
+      })
+      vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
     end,
   },
 }
