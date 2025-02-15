@@ -20,6 +20,7 @@ return {
       local lspconfig = require("lspconfig")
       local util = require("lspconfig/util")
       lspconfig.lua_ls.setup { capabilities = capabilities }
+      -- lspconfig.lua_ls.setup {}
       lspconfig.gopls.setup {
         capabilities = capabilities,
         cmd = { "gopls" },
@@ -48,7 +49,7 @@ return {
         },
       }
       lspconfig.ts_ls.setup {
-        capabilities = capabilities
+        capabilities = capabilities,
         -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
         -- init_options = {
         --   plugins = {
@@ -82,7 +83,7 @@ return {
                 -- local fileType = vim.bo.filetype
                 local conform = require("conform")
                 conform.format({ bufnr = args.buf, id = client.id })
-                -- vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
               end,
             })
           end

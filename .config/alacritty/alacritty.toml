@@ -1,6 +1,3 @@
-import = [
-  "~/.config/alacritty/catppuccin-mocha.toml"
-]
 
 [env]
 TERM = "xterm-256color"
@@ -22,6 +19,11 @@ style = "Regular"
 
 [font.offset]
 x = 0
+
+[general]
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
 
 # [[keyboard.bindings]]
 # key = "H"

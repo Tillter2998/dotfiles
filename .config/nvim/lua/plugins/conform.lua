@@ -1,6 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
+    -- enabled = false,
     config = function()
       require("conform").setup({
         formatters_by_ft = {
@@ -15,8 +16,11 @@ return {
           css = { "prettier" },
           scss = { "prettier" },
           go = { "gofumpt" },
-          vue = { "prettier" }
+          vue = { "prettier" },
         },
+        default_format_opts = {
+          lsp_format = "fallback"
+        }
       })
     end,
   }

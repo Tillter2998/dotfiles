@@ -16,6 +16,8 @@ vim.keymap.set("i", "kj", "<ESC>")
 vim.keymap.set("n", "<leader><space>x", "<cmd>source %<CR>")
 vim.keymap.set("n", "<ESC>", "<cmd>noh<CR>")
 vim.keymap.set("v", "<leader>w", ":'<,'>WrapSelected<CR>", { silent = true })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',

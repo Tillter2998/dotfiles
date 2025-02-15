@@ -1,6 +1,7 @@
 return {
   {
     'saghen/blink.cmp',
+    -- enabled = false,
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
@@ -19,7 +20,7 @@ return {
       completion = {
         list = {
           selection = {
-            preselect = false,
+            preselect = true,
             auto_insert = true
           }
         },
@@ -30,27 +31,25 @@ return {
       },
 
       keymap = {
-        --   preset = 'default',
-        --
-        --   ['<Tab>'] = { 'accept', 'fallback' },
-        --   ['<Up>'] = { 'select_prev', 'fallback' },
-        --   ['<Down>'] = { 'select_next', 'fallback' },
-        --
-        ['<C-space>'] = { 'show', 'fallback' },
+        preset = 'default',
+        ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-e>'] = { 'hide', 'fallback' },
         ['<CR>'] = { 'accept', 'fallback' },
 
-        -- = { 'snippet_forward', 'fallback' },
-        -- = { 'snippet_backward', 'fallback' },
+        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },
-        ['<S-Tab>'] = { 'select_prev', 'fallback' },
-        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<C-n>'] = { 'select_next', 'fallback' },
 
         ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
 
+        cmdline = {
+          preset = 'super-tab',
+        }
       },
 
       appearance = {

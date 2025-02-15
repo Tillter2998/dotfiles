@@ -33,29 +33,29 @@ return {
           ["<CR>"] = cmp.mapping.confirm { select = true }, -- Accept the selected suggestion or snippet
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item() -- Navigate to the next item in the suggestion list
+              cmp.select_next_item()   -- Navigate to the next item in the suggestion list
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump() -- Expand or jump to the next placeholder in a snippet
             else
-              fallback()         -- Default Tab behavior
+              fallback()               -- Default Tab behavior
             end
-          end, { "i", "s" }),    -- `i` for Insert mode, `s` for Select mode
+          end, { "i", "s" }),          -- `i` for Insert mode, `s` for Select mode
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item() -- Navigate to the previous item in the suggestion list
             elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1) -- Jump to the previous placeholder in a snippet
+              luasnip.jump(-1)       -- Jump to the previous placeholder in a snippet
             else
-              fallback()       -- Default Shift-Tab behavior
+              fallback()             -- Default Shift-Tab behavior
             end
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" }, -- LSP completions
-          { name = "luasnip" }, -- Snippet completions
+          { name = "luasnip" },  -- Snippet completions
         }, {
-          { name = "buffer" }, -- Buffer completions
-          { name = "path" }, -- Path completions
+          { name = "buffer" },   -- Buffer completions
+          { name = "path" },     -- Path completions
         }),
       }
 
