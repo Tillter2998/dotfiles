@@ -20,7 +20,9 @@ return {
       local lspconfig = require("lspconfig")
       local util = require("lspconfig/util")
       lspconfig.lua_ls.setup { capabilities = capabilities }
+
       -- lspconfig.lua_ls.setup {}
+
       lspconfig.gopls.setup {
         capabilities = capabilities,
         cmd = { "gopls" },
@@ -37,6 +39,7 @@ return {
           },
         },
       }
+
       lspconfig.volar.setup {
         capabilities = capabilities,
         -- add filetypes for typescript, javascript and vue
@@ -48,24 +51,30 @@ return {
           },
         },
       }
-      lspconfig.ts_ls.setup {
-        capabilities = capabilities,
-        -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        -- init_options = {
-        --   plugins = {
-        --     {
-        --       name = "@vue/typescript-plugin",
-        --       location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-        --       languages = { "javascript", "typescript", "vue" },
-        --     },
-        --   },
-        -- },
-        -- filetypes = {
-        --   "javascript",
-        --   "typescript",
-        --   "vue",
-        -- },
+
+
+      lspconfig.templ.setup {
+        capabilities = capabilities
       }
+
+      -- lspconfig.ts_ls.setup {
+      --   capabilities = capabilities,
+      --   -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      --   -- init_options = {
+      --   --   plugins = {
+      --   --     {
+      --   --       name = "@vue/typescript-plugin",
+      --   --       location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+      --   --       languages = { "javascript", "typescript", "vue" },
+      --   --     },
+      --   --   },
+      --   -- },
+      --   -- filetypes = {
+      --   --   "javascript",
+      --   --   "typescript",
+      --   --   "vue",
+      --   -- },
+      -- }
       -- lspconfig.vuels.setup {}
       require("custom.autocmds")
       vim.keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>")
